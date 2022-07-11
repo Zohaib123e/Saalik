@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "594907344713",
+    "project_id": "moobilc-4-final",
+    "storage_bucket": "moobilc-4-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594907344713:android:4250742da943e7c0b97498",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594907344713-mi8rfn1149vstnnfvn6610i9dre9cn2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqzL21YCFef4-khbErZdhzyzYv5TUO660"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594907344713-mi8rfn1149vstnnfvn6610i9dre9cn2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
