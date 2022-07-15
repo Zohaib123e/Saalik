@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Home_page.dart';
 import 'package:flutter_application_1/screens/All_log.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_application_1/screens/home.dart';

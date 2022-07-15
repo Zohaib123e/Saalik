@@ -1,13 +1,15 @@
 
 
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_application_1/getapi/example_three.dart';
-
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/All_log.dart';
+import 'package:flutter_application_1/pages/Home_page.dart';
+import 'package:flutter_application_1/pages/adds_page.dart';
+import 'package:flutter_application_1/pages/chat_page.dart';
+import 'package:flutter_application_1/pages/profile_page.dart';
+
+
+
+
+
 
 
 class ConvexAppExample extends StatefulWidget {
@@ -18,84 +20,229 @@ class ConvexAppExample extends StatefulWidget {
 }
 
 class _ConvexAppExampleState extends State<ConvexAppExample> {
-
-
+  int currentTab = 0;
+  final List<Widget> screens =[
+    Home_page(),
+    Chat_page(),
+    Adds_page(),
+    Profile_page(),
+  ];
+  final PageStorageBucket bucket = PageStorageBucket();
+  Widget currentScreen = Home_page();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Welcome to Home Page'),
+      body: PageStorage(
+        child: currentScreen,
+        bucket: bucket,
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: (){
+          showDialog(
+            
+      context: context,
       
-      body: Center(
+      builder: (context) => AlertDialog(
+        title: Text("What do you want to sell?"),
+        
+        actions: [
+          Spacer(),
+          SizedBox.fromSize(
+  size: Size(56, 56), // button width and height
+  child: Center(
+    child: Material(
+      color: Colors.white, // button color
+      child: InkWell(
+        splashColor: Colors.white, // splash color
+        onTap: () {}, // button pressed
         child: Column(
-          children: [
-            SizedBox(
-                height: 50,
-              
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.orange,
-                    onPrimary: Colors.black,
-                    elevation: 3,
-                    
-                    side: BorderSide(width:1, color:Color.fromARGB(255, 0, 0, 0)),
-                    shape: RoundedRectangleBorder( //to set border radius to button
-                    borderRadius: BorderRadius.circular(30)
-                    
-                ),
-                
-                    
-                  ),
-                  child: const Text("Get Api"),
-                  
-                  
-                  onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ExampleThree()));
-                  },
-                  
-                  
-                ),
-              ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.phone_android_rounded),
+            Spacer(),// icon
+            Text("Mobile"), // text
           ],
-           
-          
         ),
       ),
-      drawer: Drawer(
-          backgroundColor: Colors.white,
-          child: Scaffold(
-        
-          appBar: AppBar(
-        
-
+    ),
+  ),
+),
+Spacer(),
+Spacer(),
+Spacer(),
+  SizedBox.fromSize(
+  size: Size(56, 56), // button width and height
+  child: Center(
+    child: Material(
+      color: Colors.white, // button color
+      child: InkWell(
+        splashColor: Colors.white, // splash color
+        onTap: () {}, // button pressed
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.laptop_chromebook_rounded),
+            Spacer(),// icon
+            Text("Laptop"), // text
+          ],
         ),
-         body: Center(
-          child: Center(
-            child: Column(
-              children: [
-                IconButton(
-                    icon: Icon(Icons.logout),
-                    onPressed: () async {
-                      await FirebaseAuth.instance.signOut();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => all_log(),
-                        ),
-                      );
-                    },
-                  ),
-              ],
-            ),
-          ),
-         ),
-         
-          )
+      ),
+    ),
+  ),
+),
+Spacer(),
+Spacer(),
+Spacer(),
+ SizedBox.fromSize(
+  size: Size(56, 56), // button width and height
+  child: Center(
+    child: Material(
+      color: Colors.white, // button color
+      child: InkWell(
+        splashColor: Colors.white, // splash color
+        onTap: () {}, // button pressed
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.tablet_android_rounded),
+            Spacer(),// icon
+            Text("Tablet"), // text
+          ],
         ),
+      ),
+    ),
+  ),
+),
+Spacer(),
+Spacer(),
+        ],
+        
+      ),
+     
     );
-    
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: Container(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                
+                 MaterialButton(
+                    minWidth: 40,
+                    onPressed: (){
+                      setState(() {
+                        currentScreen = Home_page();
+                        currentTab = 0;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.home,
+                          color: currentTab == 0 ? Colors.orange : Colors.black,
+                        
+                        ),
+                        Text('Home',style: TextStyle(color: currentTab == 0 ? Colors.orange : Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                   MaterialButton(
+                    minWidth: 40,
+                    onPressed: (){
+                      setState(() {
+                        currentScreen = Chat_page();
+                        currentTab = 1;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.chat,
+                          color: currentTab == 1 ? Colors.orange : Colors.black,
+                        
+                        ),
+                        Text('Chat',style: TextStyle(color: currentTab == 1 ? Colors.orange : Colors.white),
+                        )
+                      ],
+                    ),
+                  )
+                  
+                ],
+              
+              ),
+             Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                
+                 MaterialButton(
+                    minWidth: 40,
+                    onPressed: (){
+                      setState(() {
+                        currentScreen = Adds_page();
+                        currentTab = 2;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.favorite,
+                          color: currentTab == 2 ? Colors.orange : Colors.black,
+                        
+                        ),
+                        Text('My Ads',style: TextStyle(color: currentTab == 2 ? Colors.orange : Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                   MaterialButton(
+                    minWidth: 40,
+                    onPressed: (){
+                      setState(() {
+                        currentScreen = Profile_page();
+                        currentTab = 3;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.people,
+                          color: currentTab == 3 ? Colors.orange : Colors.black,
+                        
+                        ),
+                        Text('Account',style: TextStyle(color: currentTab == 3 ? Colors.orange : Colors.white),
+                        )
+                      ],
+                    ),
+                  )
+                  
+                ],
+              
+              )
+
+            ],
+          ),
+        ),
+      ),
+
+      
+      
+     
+    );
+   
   }
   
 }

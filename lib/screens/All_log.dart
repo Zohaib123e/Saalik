@@ -1,6 +1,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/Home_page.dart';
 import 'package:flutter_application_1/screens/emailup.dart';
 import 'package:flutter_application_1/screens/home.dart';
 import 'package:flutter_application_1/screens/login.dart';
@@ -34,29 +35,7 @@ class _all_logState extends State<all_log> {
             
                         
                           
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ConvexAppExample()));
-                                },
-                                child: Text(
-                                  "skip",
-                                 
-                                  style: TextStyle(
-                                      color: Colors.black38,
-                                      
-                                      decoration: TextDecoration.underline,
-                                      
-                                      fontSize: 16),
-                                ),
-                              ),
-                            ],
-                          ),
+                          
             
             Spacer(),
             Spacer(),
@@ -211,8 +190,10 @@ class _all_logState extends State<all_log> {
     UserCredential userCredential= await FirebaseAuth.instance.signInWithCredential(credential);
     print(userCredential.user?.displayName);
     if (userCredential.user !=null){
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ConvexAppExample()));
+      Navigator.pushAndRemoveUntil(
+        (context),
+        MaterialPageRoute(builder: (context) => ConvexAppExample()),
+        (route) => false);
     }
   }
 }
