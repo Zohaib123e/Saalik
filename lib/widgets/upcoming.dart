@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wmdb2/discription.dart';
+
 import 'package:wmdb2/utils/text.dart';
 
-class TopRated extends StatelessWidget {
-  final List toprated;
+class UpComing extends StatelessWidget {
+  final List coming;
 
-  const TopRated({super.key, required this.toprated});
+  const UpComing({super.key, required this.coming});
 
   @override
   Widget build(BuildContext context) {
@@ -14,42 +15,42 @@ class TopRated extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Modified_text(text: 'Top Rated Movies',size: 16, color: Colors.white),
+          Modified_text(text: 'Upcoming Movies',size: 16, color: Colors.white),
           SizedBox(height: 10,),
           Container(height: 270,
-          child: ListView.builder(itemCount: toprated.length,
+          child: ListView.builder(itemCount: coming.length,
           scrollDirection: Axis.horizontal,
             itemBuilder: (context, index){
               return InkWell(
                  onTap: (){
-Navigator.push(context, MaterialPageRoute(builder: (context) => Description(name: toprated[index]['title'], description: toprated[index]['overview'], bannerurl: 'https://image.tmdb.org/t/p/w500'+toprated[index]['backdrop_path'], posterurl: 'https://image.tmdb.org/t/p/w500'+toprated[index]['poster_path'], vote: toprated[index]['vote_average'].toString(), launch_on: toprated[index]['release_date'])));
+Navigator.push(context, MaterialPageRoute(builder: (context) => Description(name: coming[index]['original_title'], description: coming[index]['overview'], bannerurl: 'https://image.tmdb.org/t/p/w500'+coming[index]['backdrop_path'], posterurl: 'https://image.tmdb.org/t/p/w500'+coming[index]['poster_path'], vote: coming[index]['vote_average'].toString(), launch_on: coming[index]['release_date'])));
                  },
                  child: 
-                  toprated[index]['title']!=null?Container(
+                 coming[index]['backdrop_path']!=null?Container(
                   width: 170,
                   
-
                   child: Column(
                     children: [
                       Container(
                         height: 200,
+                        
                         decoration: BoxDecoration(image: DecorationImage(
                           image: NetworkImage(
-                            'https://image.tmdb.org/t/p/w500'+toprated[index]['poster_path'],
+                            'https://image.tmdb.org/t/p/w500'+coming[index]['poster_path'],
 
 
                           ) 
                         )),
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 12,),
                       Container(
-                        child: Modified_text(text: toprated[index]['title']!=null?toprated[index]['title']:'Loading', color: Colors.white, size: 12),
+                        child: Modified_text(text: coming[index]['original_title']!=null?coming[index]['original_title']:'Loading', color: Colors.white, size: 12),
                       ),
-                    
-                       SizedBox(height: 7,),
+                       
+                     SizedBox(height: 7,),
                       Container(
                       
-                        child: Modified_text(text: '⭐'+toprated[index]['vote_average'].toString(), color: Colors.white, size: 10),
+                        child: Modified_text(text: '⭐'+coming[index]['vote_average'].toString(), color: Colors.white, size: 10),
                       ),
                     ],
                   ),

@@ -28,7 +28,9 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Description(name
                  },
                  child: 
                  trending[index]['title']!=null?Container(
-                  width: 140,
+                  width: 170,
+                  
+
                   child: Column(
                     children: [
                       Container(
@@ -41,8 +43,16 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Description(name
                           ) 
                         )),
                       ),
+                      SizedBox(height: 10,),
                       Container(
                         child: Modified_text(text: trending[index]['title']!=null?trending[index]['title']:'Loading', color: Colors.white, size: 12),
+                      ),
+                      
+                       
+                      SizedBox(height: 7,),
+                      Container(
+                      
+                        child: Modified_text(text: '⭐'+trending[index]['vote_average'].toString(), color: Colors.white, size: 10),
                       ),
                     ],
                   ),

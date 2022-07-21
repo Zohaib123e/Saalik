@@ -5,9 +5,11 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:wmdb2/utils/text.dart';
+import 'package:wmdb2/widgets/popular.dart';
 import 'package:wmdb2/widgets/toprated.dart';
 import 'package:wmdb2/widgets/trending.dart';
 import 'package:wmdb2/widgets/tv.dart';
+import 'package:wmdb2/widgets/upcoming.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,6 +22,8 @@ class _HomeState extends State<Home> {
   List trendingmovies = [];
   List topratedmovies = [];
   List tv = [];
+  List coming = [];
+  List popular = [];
   final String apikey = '61d24db1d938ea0744db10b085981774';
   final readaccesstoken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MWQyNGRiMWQ5MzhlYTA3NDRkYjEwYjA4NTk4MTc3NCIsInN1YiI6IjYyZDhmZDk1NGE1MmY4MDA1MWU1YTU3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pF6-1VOh5HZlZfUbNXrdAzjP6t4usmGB7yJk7sHxBE4';
  @override
@@ -37,13 +41,19 @@ class _HomeState extends State<Home> {
     Map trendingresult = await tmdbWithCustomLogs.v3.trending.getTrending();
     Map topratedresult = await tmdbWithCustomLogs.v3.movies.getTopRated();
     Map tvresult = await tmdbWithCustomLogs.v3.tv.getPopular();
+    Map comingresult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
+    Map popularresult = await tmdbWithCustomLogs.v3.movies.getPopular();
+   
+
     
     setState(() {
       trendingmovies = trendingresult['results'];
       topratedmovies = topratedresult['results'];
       tv = tvresult['results'];
+      coming = comingresult['results'];
+      popular = popularresult['results'];
     });
-    print(trendingmovies);
+    print(popular);
    }
 
   @override
@@ -56,8 +66,10 @@ class _HomeState extends State<Home> {
         body: ListView(
           children: [
             TV(tv: tv),
+            UpComing(coming: coming),
             TopRated(toprated: topratedmovies),
-            TrendingMovies(trending:trendingmovies)
+            TrendingMovies(trending:trendingmovies),
+            Popular(pop: popular),
           ],
         ),
     );

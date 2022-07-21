@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:wmdb2/discription.dart';
 import 'package:wmdb2/utils/text.dart';
@@ -6,6 +8,8 @@ class TV extends StatelessWidget {
   final List tv;
 
   const TV({super.key, required this.tv});
+  
+  get color => null;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +26,11 @@ class TV extends StatelessWidget {
             itemBuilder: (context, index){
               return InkWell(
                  onTap: (){
-Navigator.push(context, MaterialPageRoute(builder: (context) => Description(name: tv[index]['original_name'], description: tv[index]['overview'], bannerurl: 'https://image.tmdb.org/t/p/w500'+tv[index]['backdrop_path'], posterurl: 'https://image.tmdb.org/t/p/w500'+tv[index]['poster_path'], vote: tv[index]['vote_average'].toString(), launch_on: tv[index]['release_date'])));
+Navigator.push(context, MaterialPageRoute(builder: (context) => Description(name: tv[index]['original_name'], description: tv[index]['overview'], bannerurl: 'https://image.tmdb.org/t/p/w500'+tv[index]['backdrop_path'], posterurl: 'https://image.tmdb.org/t/p/w500'+tv[index]['poster_path'], vote: tv[index]['vote_average'].toString(), launch_on: tv[index]['first_air_date'])));
                  },
                  child: 
-                  tv[index]['title']!=null?Container(
+                   
+                  tv[index]['backdrop_path']!=null?Container(
                   padding: EdgeInsets.all(5),
                   width: 250,
                   child: Column(
@@ -48,9 +53,18 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Description(name
                       Container(
                         child: Modified_text(text: tv[index]['original_name']!=null?tv[index]['original_name']:'Loading', color: Colors.white, size: 12),
                       ),
+                     
+                       
+                      SizedBox(height: 7,),
+                      Container(
+                      
+                        child: Modified_text(text: '⭐'+tv[index]['vote_average'].toString(), color: Colors.white, size: 10),
+                      ),
+                    
                     ],
                   ),
                  ):Container(),
+                 
               );
             }),)
         ],
