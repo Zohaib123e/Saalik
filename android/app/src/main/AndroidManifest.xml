@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wmdb2">
    <application
-        android:label="wmdb2"
+        android:label="Movie News"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

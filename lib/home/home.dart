@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'package:wmdb2/utils/text.dart';
 import 'package:wmdb2/widgets/popular.dart';
+
 import 'package:wmdb2/widgets/toprated.dart';
 import 'package:wmdb2/widgets/trending.dart';
 import 'package:wmdb2/widgets/tv.dart';
@@ -19,11 +20,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+ late TextEditingController _searchTextFieldController;
+ final _border = InputBorder.none;
+
   List trendingmovies = [];
   List topratedmovies = [];
   List tv = [];
   List coming = [];
   List popular = [];
+  
   final String apikey = '61d24db1d938ea0744db10b085981774';
   final readaccesstoken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MWQyNGRiMWQ5MzhlYTA3NDRkYjEwYjA4NTk4MTc3NCIsInN1YiI6IjYyZDhmZDk1NGE1MmY4MDA1MWU1YTU3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pF6-1VOh5HZlZfUbNXrdAzjP6t4usmGB7yJk7sHxBE4';
  @override
@@ -43,6 +48,9 @@ class _HomeState extends State<Home> {
     Map tvresult = await tmdbWithCustomLogs.v3.tv.getPopular();
     Map comingresult = await tmdbWithCustomLogs.v3.movies.getUpcoming();
     Map popularresult = await tmdbWithCustomLogs.v3.movies.getPopular();
+  
+    
+    
    
 
     
@@ -52,26 +60,61 @@ class _HomeState extends State<Home> {
       tv = tvresult['results'];
       coming = comingresult['results'];
       popular = popularresult['results'];
+      
     });
     print(popular);
    }
 
   @override
   Widget build(BuildContext context) {
+    _searchTextFieldController = TextEditingController();
     return Scaffold(
+     
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Modified_text(text: 'Movie App', color: Colors.white, size:30)),
-        body: ListView(
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0), // here the desired height
+          child: AppBar(
+            
+  backgroundColor: Colors.black,
+        
+        centerTitle: true,
+        title: Image.asset('assets/image/img1.png',),
+          ),
+        ),
+
+       
+        body:  ListView(
+          
           children: [
+            SizedBox(height: 15,),
+            TextField(
+              
+              controller: _searchTextFieldController,
+              onSubmitted: (_input){},
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(focusedBorder: _border, border: OutlineInputBorder(), prefixIcon: Icon(Icons.search,color: Colors.white24,),
+              hintStyle: TextStyle(color: Colors.white54),
+              filled: false,
+              fillColor: Colors.white24,
+              hintText: 'Search.....',
+              
+              ),
+          
+            ),
             TV(tv: tv),
             UpComing(coming: coming),
             TopRated(toprated: topratedmovies),
             TrendingMovies(trending:trendingmovies),
             Popular(pop: popular),
           ],
+          
         ),
-    );
+        
+        );
+        
+        
+        
+    
   }
+  
 }
